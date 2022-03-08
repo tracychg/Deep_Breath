@@ -34,9 +34,9 @@ st.subheader(app_mode)
 #load the binary sound model
 def retrieve_model(model_selection):
     if model_selection == "binary_sound":
-        model = load_model('Deep_Breath/model_binary_sound_classification_v1.h5')
+        model = load_model('saved_models/model_binary_sound_classification_v1.h5')
     else:
-        model = load_model('Deep_Breath/resp_model_v4_model17_Tracy.h5')
+        model = load_model('saved_models/resp_model_v4_model17_Tracy.h5')
     return model
 
 def get_binary_sound_prediction(model,spectrogram):
