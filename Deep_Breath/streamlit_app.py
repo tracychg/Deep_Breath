@@ -1,21 +1,11 @@
-from pathlib import Path
-import matplotlib.pyplot as plt
 import numpy as np
 import datetime
-import requests
-from sklearn.model_selection import train_test_split
 import pandas as pd
 from tensorflow.keras.models import load_model
 import pydub
-#import tensorflow_addons as tfa
-
-#Import for streamlit
 import streamlit as st
-
-#Import for Deep learning model
 import tensorflow as tf
 from tensorflow.keras.models import load_model
-from preprocessing import from_audiofile_to_spectrogram
 
 #import preprocessing pipeline
 from preprocessing import from_audiofile_to_spectrogram
@@ -42,8 +32,11 @@ st.subheader(app_mode)
 
 
 #load the binary sound model
-def retrieve_model():
-    model = load_model('model_binary_sound_classification_v1.h5')
+def retrieve_model(model_selection):
+    if model_selection == "binary_sound":
+        model = load_model('model_binary_sound_classification_v1.h5')
+    else:
+        model = load_model("resp_model_v4_model17_Tracy.h5")
     return model
 
 def get_binary_sound_prediction(model,spectrogram):
@@ -64,10 +57,11 @@ def handle_uploaded_audio_file(uploaded_file):
 
     return fp_arr, 22050
 
-model = retrieve_model()
 
 
 if app_mode == breath_abnormalities_detection_page:
+
+    model = retrieve_model("binary_sound")
 
     # Quick instructions for the user
     st.header('Welcome to our breath abnormality detection app! 🫁')
@@ -93,15 +87,31 @@ if app_mode == breath_abnormalities_detection_page:
 
 
 
+if app_mode == disease_classification_page:
 
-# #ask user to upload a sound
-# sound = st.file_uploader("Please upload the breathing sound of the patient:",type='.wav')
-# if sound is not None:
-#     st.audio(sound, format='audio/wav')
-#     bytesdata = tf.io.read_file(sound)
+    model = retrieve_model("disease_classification")
 
-#     #with open("pip.ogg", "wb") as file:
-#     #file.write(bytesdata)
+    # Quick instructions for the user
+    st.header('Welcome to our breath abnormality detection app! 🫁')
+    instructions = """
+        Either upload your own record or select from the sidebar to get a prerecorded file.
+
+        The file you select or upload will be sent through the Deep Neural Network in real-time
+        and the output will be displayed to the screen.
+        """
+    st.write(instructions)
+
+
+    file_uploader = st.sidebar.file_uploader(label="", type=".wav")
+
+    if file_uploader is not None:
+        st.write(file_uploader)
+        y, sr = handle_uploaded_audio_file(file_uploader)
+        spectrogram = from_audiofile_to_spectrogram(y)
+        st.text(model.predict(spectrogram))
+        get_binary_sound_prediction(model,spectrogram)
+    #result
+        print(y)
 
 
 
