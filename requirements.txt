@@ -19,7 +19,7 @@ pytest
 yapf
 
 # utilities
-#six>=1.14
+six>=1.10
 joblib
 memoized-property
 termcolor
