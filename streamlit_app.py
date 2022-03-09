@@ -7,6 +7,12 @@ import streamlit as st
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 import tensorflow_addons as tfa
+from matplotlib import pyplot as plt
+import librosa.display
+import io
+from scipy.io import wavfile
+
+
 
 #import preprocessing pipeline
 from preprocessing import from_audiofile_to_spectrogram
@@ -19,21 +25,19 @@ disease_dict = {0:"COPD",
                 5:"Pneumonia"}
 
 instructions = """
-    Either upload your own record or select from the sidebar to get a prerecorded file.
-
     The file you select or upload will be sent through the Deep Neural Network in real-time
     and the output will be displayed to the screen.
     """
 
 # Application title & subtitle
 '''
-# Breathing abnormalities
+# AI Breath-based Disease Prediction app
 '''
 
 
 ############################ Sidebar + launching #################################################
 
-breath_abnormalities_detection_page = "Breath abnormalities detection"
+breath_abnormalities_detection_page = " abnormalities detection"
 disease_classification_page = "Disease classification"
 
 app_mode = st.sidebar.selectbox(
@@ -56,9 +60,9 @@ def retrieve_model(model_selection):
 
 def get_binary_sound_prediction(model,spectrogram):
     if model.predict(spectrogram) >= 0.5:
-        return "This person displays abnormalities in their breath cycle."
+        return st.text("Some abnormalities were detected in this audio fragment. Please consider speaking to a specialist as soon as possible.")
     else:
-        return "This person does not display abnormalities in their breath cycle."
+        return st.text("You are a healthy human being.")
 
 def handle_uploaded_audio_file(uploaded_file):
     a = pydub.AudioSegment.from_wav(uploaded_file)
@@ -67,7 +71,27 @@ def handle_uploaded_audio_file(uploaded_file):
     fp_arr /= np.iinfo(samples.typecode).max
     return fp_arr, 22050
 
+def plot_wave(y, sr):
+    fig, ax = plt.subplots()
+    img = librosa.display.waveshow(y, sr=sr, x_axis="time", ax=ax)
+    plt.title("Waveplot of the uploaded fragment",pad=25)
+    plt.ylabel("Amplitude")
+    return plt.gcf()
 
+def create_audio_player(audio_data, sample_rate):
+    virtualfile = io.BytesIO()
+    wavfile.write(virtualfile, rate=sample_rate, data=audio_data)
+    return virtualfile
+
+def plot_transformation(y, sr, transformation_name):
+    D = librosa.stft(y)  # STFT of y
+    S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+    fig, ax = plt.subplots()
+    img = librosa.display.specshow(S_db, x_axis="time", y_axis="linear", ax=ax)
+    # ax.set(title=transformation_name)
+    fig.colorbar(img, ax=ax, format="%+2.f dB")
+
+    return plt.gcf()
 
 if app_mode == breath_abnormalities_detection_page:
 
@@ -77,17 +101,38 @@ if app_mode == breath_abnormalities_detection_page:
     st.header('Welcome to our breath abnormality detection app! 🫁')
     st.write(instructions)
 
+    file_uploader = st.file_uploader(label="", type=".wav")
 
-    file_uploader = st.sidebar.file_uploader(label="", type=".wav")
+
+    #if st.button('Ready for some AI magic?',help="Just click on this button - it's gonna be amazing"):
 
     if file_uploader is not None:
-        st.write(file_uploader)
         y, sr = handle_uploaded_audio_file(file_uploader)
+        st.text("Have a listen to what the model uses as an input to predict")
+        st.audio(create_audio_player(y, sr))
+
         spectrogram = from_audiofile_to_spectrogram(y)
-        st.text(model.predict(spectrogram))
-        get_binary_sound_prediction(model,spectrogram)
-    #result
-        print(y)
+        spectrogram_show = np.squeeze(spectrogram, axis=-1)
+        spectrogram_show = tf.transpose(spectrogram_show)
+
+        choice = st.radio("What do you want to do?",("Convert this audio fragment to a audio wave","Convert the sound wave into a spectrogram","Convert the sound wave into a mel-spectrogram","Get our model prediction"))
+
+        if choice == "Convert this audio fragment to a audio wave":
+
+            st.pyplot(plot_wave(y, sr))
+
+        elif choice == 'Convert the sound wave into a spectrogram':
+
+            st.pyplot(plt.imshow(spectrogram_show))
+
+        elif choice == "Convert the sound wave into a mel-spectrogram":
+            st.pyplot(plot_transformation(y,sr, "melspectrogram"))
+
+        elif choice == "Get our model prediction":
+            get_binary_sound_prediction(model,spectrogram)
+
+
+
 
 
 
@@ -96,24 +141,20 @@ if app_mode == disease_classification_page:
     model = retrieve_model("disease_classification")
 
     # Quick instructions for the user
-    st.header('Welcome to our breath abnormality detection app! 🫁')
-    instructions = """
-        Either upload your own record or select from the sidebar to get a prerecorded file.
-
-        The file you select or upload will be sent through the Deep Neural Network in real-time
-        and the output will be displayed to the screen.
-        """
+    st.header('Welcome to our disease classification app! 🫁')
     st.write(instructions)
 
+    file_uploader = st.file_uploader(label="", type=".wav")
 
-    file_uploader = st.sidebar.file_uploader(label="", type=".wav")
+    if st.button('Ready for some AI magic?',help="Just click on this button - it's gonna be amazing"):
 
-    if file_uploader is not None:
-        y, sr = handle_uploaded_audio_file(file_uploader)
-        spectrogram = from_audiofile_to_spectrogram(y)
-        res = np.argmax(model.predict(spectrogram))
-        #result
-        st.text("The probablity is high that you suffer from: " + disease_dict.get(res))
+        if file_uploader is not None:
+            y, sr = handle_uploaded_audio_file(file_uploader)
+            spectrogram = from_audiofile_to_spectrogram(y)
+            st.text(model.predict(spectrogram))
+            res = np.argmax(model.predict(spectrogram))
+            #result
+            st.text("The pattern that the model detected looks most similar to the pattern of " + disease_dict.get(res))
 
 
 
