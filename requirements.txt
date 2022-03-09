@@ -31,4 +31,4 @@ tensorflow_addons
 pydub
 librosa
 soundfile
-libsndfile1
+libsndfile1-dev
