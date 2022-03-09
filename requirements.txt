@@ -30,3 +30,4 @@ tensorflow.io
 tensorflow_addons
 pydub
 librosa
+librosa.display
