@@ -93,13 +93,13 @@ if app_mode == disease_classification_page:
 
 Chronic obstructive pulmonary disease (COPD) is the name for a group of lung conditions that cause breathing difficulties.
 
-                            It includes:
+It includes:
 
-                            emphysema – damage to the air sacs in the lungs
-                            chronic bronchitis – long-term inflammation of the airways
-                            COPD is a common condition that mainly affects middle-aged or older adults who smoke. Many people do not realise they have it.
+emphysema – damage to the air sacs in the lungs
+chronic bronchitis – long-term inflammation of the airways
+COPD is a common condition that mainly affects middle-aged or older adults who smoke. Many people do not realise they have it.
 
-                            The breathing problems tend to get gradually worse over time and can limit your normal activities, although treatment can help keep the condition under control.'''
+The breathing problems tend to get gradually worse over time and can limit your normal activities, although treatment can help keep the condition under control.'''
                            ,
                 pred[0][1]:"**Healthy**",
                 pred[0][2]:'''**URTI** \n
