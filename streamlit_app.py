@@ -115,7 +115,7 @@ Bronchiectasis is a long-term condition where the airways of the lungs become wi
 
 The most common symptoms of bronchiectasis include:
 
-a persistent cough that usually brings up phlegm (sputum)
+A persistent cough that usually brings up phlegm (sputum)
 shortness of breath
 The severity of symptoms can vary widely. Some people have only a few symptoms that do not appear often, while others have wide-ranging daily symptoms.
 
@@ -137,6 +137,7 @@ Pneumonia is swelling (inflammation) of the tissue in one or both lungs. It's us
             for v in pred[0]:
                 if(v>max2 and v<max):
                         max2 = v
+            st.text(max-max2)
             if max - max2 >0.2:
                 st.markdown(f"The pattern that the model detected looks most similar to the pattern of {result_dict.get(max)}")
                 st.markdown(
