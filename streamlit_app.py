@@ -113,13 +113,13 @@ A URTI is a viral infection that can affect the nose, throat and sinuses.
 
 Bronchiectasis is a long-term condition where the airways of the lungs become widened, leading to a build-up of excess mucus that can make the lungs more vulnerable to infection.
 
-                            The most common symptoms of bronchiectasis include:
+The most common symptoms of bronchiectasis include:
 
-                            a persistent cough that usually brings up phlegm (sputum)
-                            shortness of breath
-                            The severity of symptoms can vary widely. Some people have only a few symptoms that do not appear often, while others have wide-ranging daily symptoms.
+a persistent cough that usually brings up phlegm (sputum)
+shortness of breath
+The severity of symptoms can vary widely. Some people have only a few symptoms that do not appear often, while others have wide-ranging daily symptoms.
 
-                            The symptoms tend to get worse if you develop an infection in your lungs.''',
+The symptoms tend to get worse if you develop an infection in your lungs.''',
                 pred[0][4]:'''**Bronchiolitis**
 
 Bronchiolitis is a common lower respiratory tract infection that affects babies and young children under 2 years old.
