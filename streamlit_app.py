@@ -140,10 +140,10 @@ Pneumonia is swelling (inflammation) of the tissue in one or both lungs. It's us
             st.text(max)
             st.text(max2)
             st.text(max-max2)
-            if max - max2 >0.2:
+            if max - max2 >0.3:
                 st.markdown(f"The pattern that the model detected looks most similar to the pattern of {result_dict.get(max)}")
                 st.markdown(
                 f"""<a href="https://www.england.nhs.uk/ourwork/clinical-policy/respiratory-disease//">Read more</a>""", unsafe_allow_html=True,
 )
             else:
-                st.markdown("The model cannot map the detected patterns to a disease with high confidence. It is doubting between " + result_dict.get(max2) + " and " + result_dict.get(max))
+                st.markdown("The model cannot map the detected patterns to a disease with high confidence. It is doubting between " + result_dict.get(max) + " and " + result_dict.get(max2))
