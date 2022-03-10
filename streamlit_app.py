@@ -26,50 +26,50 @@ instructions = """
 
 ############################ Sidebar + launching #################################################
 
-breath_abnormalities_detection_page = "Breath abnormalities detection"
+#breath_abnormalities_detection_page = "Breath abnormalities detection"
 disease_classification_page = "Disease classification"
 
 app_mode = st.sidebar.selectbox(
     "Choose the app mode",
     [
-        breath_abnormalities_detection_page,
+        #breath_abnormalities_detection_page,
         disease_classification_page
     ],
 )
 st.subheader(app_mode)
 
-if app_mode == breath_abnormalities_detection_page:
+# if app_mode == breath_abnormalities_detection_page:
 
-    model = retrieve_model("binary_sound")
+#     model = retrieve_model("binary_sound")
 
-    # Quick instructions for the user
-    st.header('Welcome to our breath abnormality detection app! 🫁')
-    st.write(instructions)
+#     # Quick instructions for the user
+#     st.header('Welcome to our breath abnormality detection app! 🫁')
+#     st.write(instructions)
 
-    file_uploader = st.file_uploader(label="", type=".wav")
+#     file_uploader = st.file_uploader(label="", type=".wav")
 
-    if file_uploader is not None:
-        y, sr = handle_uploaded_audio_file(file_uploader)
-        st.text("Have a listen to what the model uses as an input to predict")
-        st.audio(create_audio_player(y, sr))
+#     if file_uploader is not None:
+#         y, sr = handle_uploaded_audio_file(file_uploader)
+#         st.text("Have a listen to what the model uses as an input to predict")
+#         st.audio(create_audio_player(y, sr))
 
-        spectrogram = from_audiofile_to_spectrogram(y)
+#         spectrogram = from_audiofile_to_spectrogram(y)
 
-        choice = st.radio("What do you want to do?",("Convert this audio fragment to a audio wave","Convert the sound wave into a spectrogram","Convert the sound wave into a mel-spectrogram","Get our model prediction"))
+#         choice = st.radio("What do you want to do?",("Convert this audio fragment to a audio wave","Convert the sound wave into a spectrogram","Convert the sound wave into a mel-spectrogram","Get our model prediction"))
 
-        if choice == "Convert this audio fragment to a audio wave":
+#         if choice == "Convert this audio fragment to a audio wave":
 
-            st.pyplot(plot_wave(y, sr))
+#             st.pyplot(plot_wave(y, sr))
 
-        elif choice == 'Convert the sound wave into a spectrogram':
+#         elif choice == 'Convert the sound wave into a spectrogram':
 
-            st.pyplot(plot_spectrogram(y,sr))
+#             st.pyplot(plot_spectrogram(y,sr))
 
-        elif choice == "Convert the sound wave into a mel-spectrogram":
-            st.pyplot(plot_melspectrogram(y,sr))
+#         elif choice == "Convert the sound wave into a mel-spectrogram":
+#             st.pyplot(plot_melspectrogram(y,sr))
 
-        elif choice == "Get our model prediction":
-            get_binary_sound_prediction(model,spectrogram)
+#         elif choice == "Get our model prediction":
+#             get_binary_sound_prediction(model,spectrogram)
 
 
 
