@@ -137,7 +137,7 @@ Pneumonia is swelling (inflammation) of the tissue in one or both lungs. It's us
             for v in pred[0]:
                 if(v>max2 and v<max):
                         max2 = v
-
+            st.text(max - max2)
             if max - max2 >0.2:
                 st.markdown(f"The pattern that the model detected looks most similar to the pattern of {result_dict.get(max)}")
                 st.markdown(
