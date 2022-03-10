@@ -101,7 +101,7 @@ Chronic obstructive pulmonary disease (COPD) is the name for a group of lung con
 
                             The breathing problems tend to get gradually worse over time and can limit your normal activities, although treatment can help keep the condition under control.'''
                            ,
-                pred[0][1]:"Healthy",
+                pred[0][1]:"**Healthy**",
                 pred[0][2]:'''**URTI** \n
 
 A URTI is a viral infection that can affect the nose, throat and sinuses.
@@ -137,7 +137,6 @@ Pneumonia is swelling (inflammation) of the tissue in one or both lungs. It's us
             for v in pred[0]:
                 if(v>max2 and v<max):
                         max2 = v
-            st.text(max - max2)
             if max - max2 >0.2:
                 st.markdown(f"The pattern that the model detected looks most similar to the pattern of {result_dict.get(max)}")
                 st.markdown(
