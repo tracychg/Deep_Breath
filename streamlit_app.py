@@ -124,9 +124,9 @@ The symptoms tend to get worse if you develop an infection in your lungs.''',
 
 Bronchiolitis is a common lower respiratory tract infection that affects babies and young children under 2 years old.
 
-                            Most cases are mild and clear up within 2 to 3 weeks without the need for treatment, although some children have severe symptoms and need hospital treatment.
+Most cases are mild and clear up within 2 to 3 weeks without the need for treatment, although some children have severe symptoms and need hospital treatment.
 
-                            The early symptoms of bronchiolitis are similar to those of a common cold, such as a runny nose and a cough.''',
+The early symptoms of bronchiolitis are similar to those of a common cold, such as a runny nose and a cough.''',
                 pred[0][5]:'''**Pneumonia**
 
 Pneumonia is swelling (inflammation) of the tissue in one or both lungs. It's usually caused by a bacterial infection.
