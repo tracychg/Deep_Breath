@@ -1,10 +1,8 @@
-# Project name
-Deep Breath
+# Project - Deep Breath
 
 # Project aims
 
-The objective of this project was to build a model capable of identifying breath abnormalities from audio recordings and predicting the most likely lung disease type accordingly.
-It was imagined as an aid and support to doctors in performing pulmonary auscultation, the accuracy of which can vary greatly from doctor to doctor according to clinical experience.
+The objective of this project was to build a model capable of identifying breath abnormalities from audio recordings and predicting the most likely lung disease type accordingly. It was imagined as an aid and support to doctors in performing pulmonary auscultation, the accuracy of which can vary greatly from doctor to doctor according to clinical experience.
 
 # Dataset and background
 
@@ -14,7 +12,7 @@ The dataset we used was obtained from Kaggle (https://www.kaggle.com/vbookshelf/
 
 Pandas, matplotlib, seaborn, scikit-learn, and tensorflow keras, the use of which was essential to our project in enabling us to convert audio to image through spectrograms and mel-spectrograms, while librosa was also used for exploratory data analysis.
 
-# Model and performance:
+# Model and performance
 
 Our model is a CNN model which performs multi-class classification, determining whether a patient is healthy or ill with one of five respiratory diseases with an average accuracy of 86%.
 
@@ -24,4 +22,4 @@ Notebooks can be found in the Notebooks folder in the project’s Github reposit
 
 # Data engineering
 
-Our model was then deployed on Streamlit Cloud and can be accessed at the following address: https://share.streamlit.io/tracychg/deep_breath
+Our model was deployed on Streamlit Cloud and can be accessed at the following address: https://share.streamlit.io/tracychg/deep_breath
