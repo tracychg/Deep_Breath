@@ -1,74 +1,27 @@
-# Data analysis
-- Document here the project: Deep_Breath
-- Description: Project Description
-- Data Source:
-- Type of analysis:
+# Project name
+Deep Breath
 
-Please document the project the better you can.
+# Project aims
 
-# Startup the project
+The objective of this project was to build a model capable of identifying breath abnormalities from audio recordings and predicting the most likely lung disease type accordingly.
+It was imagined as an aid and support to doctors in performing pulmonary auscultation, the accuracy of which can vary greatly from doctor to doctor according to clinical experience.
 
-The initial setup.
+# Dataset and background
 
-Create virtualenv and install the project:
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv ~/venv ; source ~/venv/bin/activate ;\
-    pip install pip -U; pip install -r requirements.txt
-```
+The dataset we used was obtained from Kaggle (https://www.kaggle.com/vbookshelf/respiratory-sound-database/) and consists of breath recordings from 126 patients collected by research teams in Greece and Portugal. In total, we processed 960 audio files and more than 6000 respiratory cycles.
 
-Unittest test:
-```bash
-make clean install test
-```
+# Libraries
 
-Check for Deep_Breath in gitlab.com/{group}.
-If your project is not set please add it:
+Pandas, matplotlib, seaborn, scikit-learn, and tensorflow keras, the use of which was essential to our project in enabling us to convert audio to image through spectrograms and mel-spectrograms, while librosa was also used for exploratory data analysis.
 
-- Create a new project on `gitlab.com/{group}/Deep_Breath`
-- Then populate it:
+# Model and performance:
 
-```bash
-##   e.g. if group is "{group}" and project_name is "Deep_Breath"
-git remote add origin git@github.com:{group}/Deep_Breath.git
-git push -u origin master
-git push -u origin --tags
-```
+Our model is a CNN model which performs multi-class classification, determining whether a patient is healthy or ill with one of five respiratory diseases with an average accuracy of 86%.
 
-Functionnal test with a script:
+A particular aim we had in mind when working on this project, was to maximise recall in identifying and predicting COPD, a disease which accounts for about 5% of total UK deaths, and which our model achieves with a 96% average.
 
-```bash
-cd
-mkdir tmp
-cd tmp
-Deep_Breath-run
-```
+Notebooks can be found in the Notebooks folder in the project’s Github repository.
 
-# Install
+# Data engineering
 
-Go to `https://github.com/{group}/Deep_Breath` to see the project, manage issues,
-setup you ssh public key, ...
-
-Create a python3 virtualenv and activate it:
-
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv -ppython3 ~/venv ; source ~/venv/bin/activate
-```
-
-Clone the project and install it:
-
-```bash
-git clone git@github.com:{group}/Deep_Breath.git
-cd Deep_Breath
-pip install -r requirements.txt
-make clean install test                # install and test
-```
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-Deep_Breath-run
-```
+Our model was then deployed on Streamlit Cloud and can be accessed at the following address: https://share.streamlit.io/tracychg/deep_breath
