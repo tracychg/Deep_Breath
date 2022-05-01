@@ -14,7 +14,7 @@ Pandas, matplotlib, seaborn, scikit-learn, and tensorflow keras, the use of whic
 
 # Model and performance
 
-Our model is a CNN model which performs multi-class classification, determining whether a patient is healthy or ill with one of five respiratory diseases with an average accuracy of 86%.
+Our model is a CNN model which performs multi-class classification, determining whether a patient is healthy or ill with one of five respiratory diseases with an average precision of 86% and recall of 85%.
 
 A particular aim we had in mind when working on this project, was to maximise recall in identifying and predicting COPD, a disease which accounts for about 5% of total UK deaths, and which our model achieves with a 96% average.
 
